@@ -4,23 +4,23 @@ import { Palette, Code2, Lightbulb, Heart } from "lucide-react";
 const highlights = [
   {
     icon: Palette,
-    title: "Design Thinking",
-    description: "User-centered approach to every pixel",
+    title: "User Research",
+    description: "Deep understanding of user needs",
   },
   {
     icon: Code2,
-    title: "Clean Code",
-    description: "Scalable and maintainable solutions",
+    title: "Prototyping",
+    description: "Wireframing & interactive prototypes",
   },
   {
     icon: Lightbulb,
-    title: "Creative Solutions",
-    description: "Thinking outside the box",
+    title: "Problem-Solving",
+    description: "200+ LeetCode problems solved",
   },
   {
     icon: Heart,
-    title: "Passion Driven",
-    description: "Love for craft in every project",
+    title: "Collaboration",
+    description: "Cross-team stakeholder partnerships",
   },
 ];
 
@@ -84,11 +84,11 @@ export function AboutSection() {
               <div className="absolute -bottom-4 -right-4 lg:right-8 bg-card rounded-2xl p-4 shadow-card border border-border animate-float-slow">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-xl bg-gradient-accent flex items-center justify-center">
-                    <span className="text-2xl">🎨</span>
+                    <span className="text-2xl">🎓</span>
                   </div>
                   <div>
-                    <p className="font-display font-semibold text-foreground">3+ Years</p>
-                    <p className="text-sm text-muted-foreground">Experience</p>
+                    <p className="font-display font-semibold text-foreground">B.Tech CSE</p>
+                    <p className="text-sm text-muted-foreground">AI Specialization</p>
                   </div>
                 </div>
               </div>
@@ -106,13 +106,13 @@ export function AboutSection() {
                 <span className="gradient-text"> Digital Reality</span>
               </h2>
               <p className="font-body text-lg text-muted-foreground mb-6 leading-relaxed">
-                I'm a passionate Frontend Developer and UI/UX Designer based in the digital realm. 
-                I specialize in creating engaging web experiences that blend aesthetics with functionality.
+                I'm a UI/UX Designer based in Gurugram with a B.Tech in CSE (AI) from Gurugram University. 
+                I specialize in research, prototyping, and creating responsive designs that make an impact.
               </p>
               <p className="font-body text-muted-foreground mb-8 leading-relaxed">
-                With a keen eye for detail and a love for clean code, I bring designs to life 
-                through thoughtful interactions and pixel-perfect implementations. Every project 
-                is an opportunity to create something meaningful.
+                With experience at companies like Incredipets and EpiCred, I've led end-to-end UX design projects,
+                created scalable design systems, and improved user experiences with measurable outcomes. 
+                I love turning complex problems into elegant, user-friendly solutions.
               </p>
             </div>
 

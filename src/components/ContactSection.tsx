@@ -65,7 +65,7 @@ export function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Email</p>
-                  <p className="font-medium text-foreground">hello@avtar.dev</p>
+                  <p className="font-medium text-foreground">avtar.singh.design@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 p-4 rounded-2xl bg-secondary/50 border border-border/50">
@@ -74,7 +74,7 @@ export function ContactSection() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Location</p>
-                  <p className="font-medium text-foreground">Available Worldwide</p>
+                  <p className="font-medium text-foreground">Gurugram, India</p>
                 </div>
               </div>
             </div>

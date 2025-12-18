@@ -1,28 +1,45 @@
 import { useEffect, useRef } from "react";
+import { 
+  Figma, 
+  Palette, 
+  FileText, 
+  LayoutGrid, 
+  Trello, 
+  Code2,
+  Smartphone,
+  TestTube,
+  Users,
+  Search,
+  Lightbulb,
+  MessageSquare
+} from "lucide-react";
 
-const designTools = [
-  { name: "Figma", level: 95, emoji: "🎨" },
-  { name: "Adobe XD", level: 85, emoji: "✨" },
-  { name: "Photoshop", level: 80, emoji: "🖼️" },
-  { name: "Illustrator", level: 75, emoji: "✏️" },
+const tools = [
+  { name: "Figma", icon: Figma },
+  { name: "Canva", icon: Palette },
+  { name: "Lottie Creator", icon: FileText },
+  { name: "Notion", icon: LayoutGrid },
+  { name: "Miro", icon: LayoutGrid },
+  { name: "JIRA", icon: Trello },
+  { name: "VS Code", icon: Code2 },
+  { name: "Cursor AI", icon: Code2 },
 ];
 
-const devSkills = [
-  { name: "React", level: 92, emoji: "⚛️" },
-  { name: "TypeScript", level: 88, emoji: "📘" },
-  { name: "Tailwind CSS", level: 95, emoji: "💨" },
-  { name: "Next.js", level: 85, emoji: "▲" },
-  { name: "Framer Motion", level: 80, emoji: "🎬" },
-  { name: "Git", level: 85, emoji: "🔀" },
+const technicalSkills = [
+  { name: "Prototyping", icon: Smartphone },
+  { name: "Wireframing", icon: LayoutGrid },
+  { name: "Design Systems", icon: Figma },
+  { name: "Responsive Designs", icon: Smartphone },
+  { name: "A/B Testing", icon: TestTube },
+  { name: "ReactJS", icon: Code2 },
 ];
 
 const softSkills = [
-  "Problem Solving",
-  "Communication",
-  "Team Collaboration",
-  "Time Management",
-  "Attention to Detail",
-  "Creative Thinking",
+  { name: "User Research", icon: Search },
+  { name: "Usability Testing", icon: TestTube },
+  { name: "Stakeholder Collaboration", icon: Users },
+  { name: "Problem-Solving", icon: Lightbulb },
+  { name: "Communication", icon: MessageSquare },
 ];
 
 export function SkillsSection() {
@@ -34,12 +51,6 @@ export function SkillsSection() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("visible");
-            // Animate skill bars
-            const bars = entry.target.querySelectorAll(".skill-bar-fill");
-            bars.forEach((bar) => {
-              const width = bar.getAttribute("data-width");
-              (bar as HTMLElement).style.width = `${width}%`;
-            });
           }
         });
       },
@@ -79,45 +90,35 @@ export function SkillsSection() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
-          {/* Design Tools */}
+          {/* Tools */}
           <div className="reveal">
             <div className="bg-card rounded-3xl p-6 border border-border h-full">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-2xl bg-gradient-accent flex items-center justify-center">
-                  <span className="text-2xl">🎨</span>
+                  <span className="text-2xl">🛠️</span>
                 </div>
                 <h3 className="font-display text-xl font-semibold text-foreground">
-                  Design Tools
+                  Tools
                 </h3>
               </div>
-              <div className="space-y-5">
-                {designTools.map((skill, index) => (
-                  <div key={skill.name} style={{ transitionDelay: `${index * 100}ms` }}>
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-lg">{skill.emoji}</span>
-                        <span className="font-body font-medium text-foreground">
-                          {skill.name}
-                        </span>
-                      </div>
-                      <span className="text-sm text-muted-foreground">
-                        {skill.level}%
-                      </span>
-                    </div>
-                    <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                      <div
-                        className="skill-bar-fill h-full bg-gradient-accent rounded-full transition-all duration-1000 ease-out"
-                        data-width={skill.level}
-                        style={{ width: 0 }}
-                      />
-                    </div>
+              <div className="grid grid-cols-2 gap-3">
+                {tools.map((tool, index) => (
+                  <div
+                    key={tool.name}
+                    className="flex items-center gap-3 p-3 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors"
+                    style={{ transitionDelay: `${index * 50}ms` }}
+                  >
+                    <tool.icon className="w-5 h-5 text-primary" />
+                    <span className="font-body text-sm font-medium text-foreground">
+                      {tool.name}
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Development Skills */}
+          {/* Technical Skills */}
           <div className="reveal" style={{ transitionDelay: "100ms" }}>
             <div className="bg-card rounded-3xl p-6 border border-border h-full">
               <div className="flex items-center gap-3 mb-6">
@@ -125,30 +126,20 @@ export function SkillsSection() {
                   <span className="text-2xl">💻</span>
                 </div>
                 <h3 className="font-display text-xl font-semibold text-foreground">
-                  Development
+                  Technical Skills
                 </h3>
               </div>
-              <div className="space-y-5">
-                {devSkills.map((skill, index) => (
-                  <div key={skill.name} style={{ transitionDelay: `${index * 100}ms` }}>
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-lg">{skill.emoji}</span>
-                        <span className="font-body font-medium text-foreground">
-                          {skill.name}
-                        </span>
-                      </div>
-                      <span className="text-sm text-muted-foreground">
-                        {skill.level}%
-                      </span>
-                    </div>
-                    <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                      <div
-                        className="skill-bar-fill h-full bg-gradient-accent rounded-full transition-all duration-1000 ease-out"
-                        data-width={skill.level}
-                        style={{ width: 0 }}
-                      />
-                    </div>
+              <div className="grid grid-cols-2 gap-3">
+                {technicalSkills.map((skill, index) => (
+                  <div
+                    key={skill.name}
+                    className="flex items-center gap-3 p-3 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors"
+                    style={{ transitionDelay: `${index * 50}ms` }}
+                  >
+                    <skill.icon className="w-5 h-5 text-primary" />
+                    <span className="font-body text-sm font-medium text-foreground">
+                      {skill.name}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -166,29 +157,31 @@ export function SkillsSection() {
                   Soft Skills
                 </h3>
               </div>
-              <div className="flex flex-wrap gap-3">
+              <div className="space-y-3">
                 {softSkills.map((skill, index) => (
-                  <span
-                    key={skill}
-                    className="px-4 py-2 rounded-2xl bg-secondary text-secondary-foreground font-body text-sm hover:bg-accent hover:text-accent-foreground transition-colors cursor-default"
+                  <div
+                    key={skill.name}
+                    className="flex items-center gap-3 p-3 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors"
                     style={{ transitionDelay: `${index * 50}ms` }}
                   >
-                    {skill}
-                  </span>
+                    <skill.icon className="w-5 h-5 text-primary" />
+                    <span className="font-body text-sm font-medium text-foreground">
+                      {skill.name}
+                    </span>
+                  </div>
                 ))}
               </div>
               
               {/* Fun stats */}
-              <div className="mt-8 pt-6 border-t border-border">
-                <p className="text-sm text-muted-foreground mb-4">Fun facts:</p>
+              <div className="mt-6 pt-6 border-t border-border">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-center p-3 rounded-xl bg-secondary/50">
-                    <p className="font-display text-2xl font-bold text-primary">50+</p>
-                    <p className="text-xs text-muted-foreground">Projects Done</p>
+                    <p className="font-display text-2xl font-bold text-primary">200+</p>
+                    <p className="text-xs text-muted-foreground">LeetCode Problems</p>
                   </div>
                   <div className="text-center p-3 rounded-xl bg-secondary/50">
-                    <p className="font-display text-2xl font-bold text-primary">∞</p>
-                    <p className="text-xs text-muted-foreground">Cups of Coffee</p>
+                    <p className="font-display text-2xl font-bold text-primary">100+</p>
+                    <p className="text-xs text-muted-foreground">Screens Designed</p>
                   </div>
                 </div>
               </div>

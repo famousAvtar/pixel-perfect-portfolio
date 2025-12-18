@@ -55,11 +55,9 @@ export function HeroSection() {
 
           {/* Description */}
           <p className="font-body text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 opacity-0 animate-slide-up stagger-3">
-            Frontend Developer & UI/UX Designer who transforms ideas into 
-            <span className="text-foreground font-medium"> beautiful</span>,
-            <span className="text-foreground font-medium"> intuitive</span>, and
-            <span className="text-foreground font-medium"> memorable </span>
-            digital products.
+            UI/UX Designer skilled in research, prototyping, and responsive design,
+            <span className="text-foreground font-medium"> seeking to create impactful digital experiences</span>
+            <span className="text-muted-foreground"> with measurable outcomes.</span>
           </p>
 
           {/* CTA Buttons */}

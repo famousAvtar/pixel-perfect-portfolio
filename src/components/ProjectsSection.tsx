@@ -1,35 +1,33 @@
 import { useEffect, useRef } from "react";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const projects = [
   {
-    title: "E-Commerce Redesign",
-    description: "A complete redesign of an e-commerce platform focusing on user experience and conversion optimization.",
-    tags: ["React", "Figma", "Tailwind CSS"],
+    title: "EpiCred (EpiScholar)",
+    description: "Built and scaled a reusable design system in Figma with 50+ components and tokens, cutting design-to-dev handoff time by 35% and ensuring brand consistency across 100+ screens.",
+    achievements: [
+      "Conducted usability testing and heuristic evaluation",
+      "Optimized loan application flow for accessibility",
+      "Increased overall task success rate"
+    ],
+    tags: ["Design System", "Figma", "Usability Testing", "Interaction Design"],
     color: "from-primary/20 to-cyan/20",
-    emoji: "🛍️",
+    emoji: "💳",
+    link: "https://www.epicred.in",
   },
   {
-    title: "Finance Dashboard",
-    description: "Modern dashboard for tracking personal finances with data visualization and insights.",
-    tags: ["TypeScript", "Chart.js", "UI/UX"],
+    title: "Admitio.club (EpiScholar)",
+    description: "Designed search, filters, and program listing flows for Admitio, improving first-result click-through rate by 22% and streamlining admission discovery for 5,000+ students.",
+    achievements: [
+      "Applied information architecture & user journey mapping",
+      "Restructured navigation and content hierarchy",
+      "Boosted engagement by 18%"
+    ],
+    tags: ["UX Research", "Wireframing", "Information Architecture"],
     color: "from-cyan/20 to-mint/30",
-    emoji: "📊",
-  },
-  {
-    title: "Health & Wellness App",
-    description: "Mobile-first web application for tracking health goals and daily wellness activities.",
-    tags: ["Next.js", "Framer Motion", "Design System"],
-    color: "from-mint/20 to-sky/20",
-    emoji: "🏃‍♂️",
-  },
-  {
-    title: "Creative Portfolio",
-    description: "An artistic portfolio website for a photographer featuring immersive galleries.",
-    tags: ["GSAP", "Three.js", "Creative Dev"],
-    color: "from-sky/20 to-primary/20",
-    emoji: "📸",
+    emoji: "🎓",
+    link: "https://www.admitio.club",
   },
 ];
 
@@ -76,7 +74,7 @@ export function ProjectsSection() {
             Featured <span className="gradient-text">Projects</span>
           </h2>
           <p className="font-body text-lg text-muted-foreground">
-            A selection of projects that showcase my skills in design and development
+            Real projects with measurable impact on user experience and business outcomes
           </p>
         </div>
 
@@ -105,9 +103,19 @@ export function ProjectsSection() {
                   <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                     {project.title}
                   </h3>
-                  <p className="font-body text-muted-foreground mb-4 line-clamp-2">
+                  <p className="font-body text-muted-foreground mb-4">
                     {project.description}
                   </p>
+
+                  {/* Achievements */}
+                  <ul className="mb-4 space-y-1">
+                    {project.achievements.map((achievement, i) => (
+                      <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
+                        <span className="text-primary mt-1">•</span>
+                        {achievement}
+                      </li>
+                    ))}
+                  </ul>
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2 mb-4">
@@ -123,26 +131,17 @@ export function ProjectsSection() {
 
                   {/* Actions */}
                   <div className="flex items-center gap-3">
-                    <Button variant="ghost" size="sm" className="gap-2">
-                      <ExternalLink className="w-4 h-4" />
-                      Live Demo
-                    </Button>
-                    <Button variant="ghost" size="sm" className="gap-2">
-                      <Github className="w-4 h-4" />
-                      Code
+                    <Button variant="ghost" size="sm" className="gap-2" asChild>
+                      <a href={project.link} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="w-4 h-4" />
+                        View Live
+                      </a>
                     </Button>
                   </div>
                 </div>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* View All Button */}
-        <div className="text-center mt-12 reveal">
-          <Button variant="outline" size="lg">
-            View All Projects
-          </Button>
         </div>
       </div>
     </section>
