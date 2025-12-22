@@ -1,6 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TiltCard } from "@/components/TiltCard";
+import { MagneticButton } from "@/components/MagneticButton";
 
 const projects = [
   {
@@ -33,6 +35,8 @@ const projects = [
 
 export function ProjectsSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [clickedEmoji, setClickedEmoji] = useState<number | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -52,6 +56,11 @@ export function ProjectsSection() {
     return () => observer.disconnect();
   }, []);
 
+  const handleEmojiClick = (index: number) => {
+    setClickedEmoji(index);
+    setTimeout(() => setClickedEmoji(null), 600);
+  };
+
   return (
     <section
       id="projects"
@@ -67,7 +76,7 @@ export function ProjectsSection() {
       <div className="container max-w-6xl mx-auto px-6 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 reveal">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-4 hover-shake">
             My Work
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-4 text-foreground">
@@ -85,61 +94,79 @@ export function ProjectsSection() {
               key={project.title}
               className="reveal group"
               style={{ transitionDelay: `${index * 100}ms` }}
+              onMouseEnter={() => setHoveredProject(index)}
+              onMouseLeave={() => setHoveredProject(null)}
             >
-              <div className="h-full bg-card rounded-3xl border border-border overflow-hidden card-hover">
-                {/* Project Preview */}
-                <div className={`aspect-video bg-gradient-to-br ${project.color} relative overflow-hidden`}>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-7xl group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500">
-                      {project.emoji}
-                    </span>
-                  </div>
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-300" />
-                </div>
-
-                {/* Project Info */}
-                <div className="p-6">
-                  <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="font-body text-muted-foreground mb-4">
-                    {project.description}
-                  </p>
-
-                  {/* Achievements */}
-                  <ul className="mb-4 space-y-1">
-                    {project.achievements.map((achievement, i) => (
-                      <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                        <span className="text-primary mt-1">•</span>
-                        {achievement}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium"
+              <TiltCard className="h-full" tiltAmount={8}>
+                <div className="h-full bg-card rounded-3xl border border-border overflow-hidden hover-lift hover-glow transition-all duration-300">
+                  {/* Project Preview */}
+                  <div className={`aspect-video bg-gradient-to-br ${project.color} relative overflow-hidden`}>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <button
+                        onClick={() => handleEmojiClick(index)}
+                        className={`text-7xl transition-all duration-500 hover:scale-125 active:scale-90 ${
+                          hoveredProject === index ? "animate-bounce-soft" : ""
+                        } ${clickedEmoji === index ? "animate-jiggle" : ""}`}
                       >
-                        {tag}
-                      </span>
-                    ))}
+                        {project.emoji}
+                      </button>
+                    </div>
+                    {/* Hover overlay with particles */}
+                    <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-300" />
+                    {hoveredProject === index && (
+                      <>
+                        <div className="absolute top-4 left-4 w-3 h-3 rounded-full bg-primary/40 animate-float" />
+                        <div className="absolute bottom-4 right-4 w-4 h-4 rounded-lg bg-cyan/40 animate-float-slow rotate-45" />
+                        <div className="absolute top-1/2 left-8 w-2 h-2 rounded-full bg-mint animate-pulse-soft" />
+                      </>
+                    )}
                   </div>
 
-                  {/* Actions */}
-                  <div className="flex items-center gap-3">
-                    <Button variant="ghost" size="sm" className="gap-2" asChild>
-                      <a href={project.link} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="w-4 h-4" />
-                        View Live
-                      </a>
-                    </Button>
+                  {/* Project Info */}
+                  <div className="p-6">
+                    <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="font-body text-muted-foreground mb-4">
+                      {project.description}
+                    </p>
+
+                    {/* Achievements */}
+                    <ul className="mb-4 space-y-1">
+                      {project.achievements.map((achievement, i) => (
+                        <li key={i} className="text-sm text-muted-foreground flex items-start gap-2 group/item hover:text-foreground transition-colors">
+                          <span className="text-primary mt-1 group-hover/item:scale-125 transition-transform">•</span>
+                          {achievement}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium hover:bg-primary hover:text-primary-foreground transition-colors cursor-default"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex items-center gap-3">
+                      <MagneticButton strength={20}>
+                        <Button variant="ghost" size="sm" className="gap-2 hover-glow" asChild>
+                          <a href={project.link} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="w-4 h-4" />
+                            View Live
+                          </a>
+                        </Button>
+                      </MagneticButton>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </TiltCard>
             </div>
           ))}
         </div>

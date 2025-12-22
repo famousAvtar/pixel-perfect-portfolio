@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
+import { TiltCard } from "@/components/TiltCard";
 
 const experiences = [
   {
@@ -28,6 +29,8 @@ const experiences = [
 
 export function ExperienceSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [hoveredExp, setHoveredExp] = useState<number | null>(null);
+  const [clickedDot, setClickedDot] = useState<number | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -47,6 +50,11 @@ export function ExperienceSection() {
     return () => observer.disconnect();
   }, []);
 
+  const handleDotClick = (index: number) => {
+    setClickedDot(index);
+    setTimeout(() => setClickedDot(null), 600);
+  };
+
   return (
     <section
       id="experience"
@@ -62,7 +70,7 @@ export function ExperienceSection() {
       <div className="container max-w-6xl mx-auto px-6 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 reveal">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-4 hover-shake">
             Career Journey
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-4 text-foreground">
@@ -86,56 +94,67 @@ export function ExperienceSection() {
                   index % 2 === 0 ? "md:flex-row-reverse" : ""
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
+                onMouseEnter={() => setHoveredExp(index)}
+                onMouseLeave={() => setHoveredExp(null)}
               >
-                {/* Timeline dot */}
-                <div className="absolute left-0 md:left-1/2 w-4 h-4 rounded-full bg-primary md:-translate-x-1/2 z-10">
+                {/* Timeline dot - Interactive */}
+                <button
+                  onClick={() => handleDotClick(index)}
+                  className={`absolute left-0 md:left-1/2 w-4 h-4 rounded-full bg-primary md:-translate-x-1/2 z-10 transition-all duration-300 hover:scale-150 ${
+                    clickedDot === index ? "animate-jiggle scale-150" : ""
+                  } ${hoveredExp === index ? "scale-125" : ""}`}
+                >
                   {exp.current && (
                     <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-50" />
                   )}
-                </div>
+                </button>
 
                 {/* Content card */}
                 <div className={`ml-8 md:ml-0 md:w-[calc(50%-2rem)] ${index % 2 === 0 ? "md:mr-auto" : "md:ml-auto"}`}>
-                  <div className="bg-card rounded-3xl p-6 border border-border shadow-card hover:border-primary/30 transition-colors">
-                    {/* Header */}
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="font-display text-xl font-semibold text-foreground mb-1">
-                          {exp.title}
-                        </h3>
-                        <p className="font-body text-primary font-medium">
-                          {exp.company}
-                        </p>
+                  <TiltCard tiltAmount={6}>
+                    <div className={`bg-card rounded-3xl p-6 border border-border shadow-card transition-all duration-300 ${
+                      hoveredExp === index ? "border-primary/30 shadow-glow" : ""
+                    }`}>
+                      {/* Header */}
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <h3 className="font-display text-xl font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
+                            {exp.title}
+                          </h3>
+                          <p className="font-body text-primary font-medium">
+                            {exp.company}
+                          </p>
+                        </div>
+                        {exp.current && (
+                          <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium animate-pulse-soft">
+                            Current
+                          </span>
+                        )}
                       </div>
-                      {exp.current && (
-                        <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
-                          Current
-                        </span>
-                      )}
-                    </div>
 
-                    {/* Meta */}
-                    <div className="flex flex-wrap gap-4 mb-4 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1.5">
-                        <Calendar className="w-4 h-4" />
-                        {exp.period}
+                      {/* Meta */}
+                      <div className="flex flex-wrap gap-4 mb-4 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-1.5 hover:text-foreground transition-colors">
+                          <Calendar className="w-4 h-4" />
+                          {exp.period}
+                        </div>
+                        <div className="flex items-center gap-1.5 hover:text-foreground transition-colors">
+                          <MapPin className="w-4 h-4" />
+                          {exp.location}
+                        </div>
                       </div>
-                      <div className="flex items-center gap-1.5">
-                        <MapPin className="w-4 h-4" />
-                        {exp.location}
-                      </div>
-                    </div>
 
-                    {/* Responsibilities */}
-                    <ul className="space-y-2">
-                      {exp.responsibilities.map((resp, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <Briefcase className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                          <span>{resp}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                      {/* Responsibilities */}
+                      <ul className="space-y-2">
+                        {exp.responsibilities.map((resp, i) => (
+                          <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground group/item hover:text-foreground transition-colors">
+                            <Briefcase className="w-4 h-4 text-primary mt-0.5 flex-shrink-0 group-hover/item:rotate-12 transition-transform" />
+                            <span>{resp}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </TiltCard>
                 </div>
               </div>
             ))}
