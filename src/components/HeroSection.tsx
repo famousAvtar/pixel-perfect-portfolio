@@ -21,28 +21,10 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
-      {/* Animated Blobs */}
+      {/* Light decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="blob absolute -top-40 -left-40 w-96 h-96 bg-gradient-blob opacity-60" />
-        <div className="blob-2 absolute top-1/4 -right-32 w-80 h-80 bg-gradient-blob opacity-50" />
-        <div className="blob absolute bottom-0 left-1/3 w-72 h-72 bg-gradient-blob opacity-40" style={{ animationDelay: "2s" }} />
-        
-        {/* Interactive floating shapes that follow mouse */}
-        <ParallaxFloater speed={0.3} className="absolute top-1/4 left-[15%]">
-          <div className="w-4 h-4 rounded-full bg-primary/30 animate-float" />
-        </ParallaxFloater>
-        <ParallaxFloater speed={-0.2} className="absolute top-1/3 right-[20%]">
-          <div className="w-6 h-6 rounded-lg bg-cyan/30 animate-float-slow rotate-45" />
-        </ParallaxFloater>
-        <ParallaxFloater speed={0.4} className="absolute bottom-1/4 left-[25%]">
-          <div className="w-3 h-3 rounded-full bg-mint animate-float" />
-        </ParallaxFloater>
-        <ParallaxFloater speed={-0.3} className="absolute top-1/2 right-[15%]">
-          <div className="w-8 h-8 rounded-full border-2 border-primary/20 animate-float-slow animate-spin-slow" />
-        </ParallaxFloater>
-        <ParallaxFloater speed={0.2} className="absolute bottom-1/3 right-[30%]">
-          <div className="w-5 h-5 rounded-lg bg-sky/40 animate-float rotate-12" />
-        </ParallaxFloater>
+        <div className="absolute -top-20 -left-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 -right-16 w-48 h-48 bg-cyan/10 rounded-full blur-2xl" />
       </div>
 
       <div className="container max-w-6xl mx-auto px-6 pt-24 pb-12 relative z-10">
@@ -65,14 +47,14 @@ export function HeroSection() {
 
           {/* Tagline */}
           <p className="font-display text-xl md:text-2xl lg:text-3xl text-muted-foreground mb-4 opacity-0 animate-slide-up stagger-2">
-            Crafting Digital Experiences
+            Frontend Developer & UX Designer
           </p>
 
           {/* Description */}
           <p className="font-body text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 opacity-0 animate-slide-up stagger-3">
-            UI/UX Designer skilled in research, prototyping, and responsive design,
-            <span className="text-foreground font-medium"> seeking to create impactful digital experiences</span>
-            <span className="text-muted-foreground"> with measurable outcomes.</span>
+            Frontend Developer & UX Designer building
+            <span className="text-foreground font-medium"> pixel-perfect, accessible interfaces</span>
+            <span className="text-muted-foreground"> with React, TypeScript & modern web tech.</span>
           </p>
 
           {/* CTA Buttons */}
