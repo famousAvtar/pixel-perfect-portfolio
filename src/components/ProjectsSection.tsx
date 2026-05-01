@@ -6,7 +6,7 @@ import { MagneticButton } from "@/components/MagneticButton";
 
 const projects = [
   {
-    title: "EpiCred (EpiScholar)",
+    title: "EpiCred",
     description: "Built and scaled a reusable design system in Figma with 50+ components and tokens, cutting design-to-dev handoff time by 35% and ensuring brand consistency across 100+ screens.",
     achievements: [
       "Conducted usability testing and heuristic evaluation",
@@ -19,8 +19,8 @@ const projects = [
     link: "https://www.epicred.in",
   },
   {
-    title: "Admitio.club (EpiScholar)",
-    description: "Designed search, filters, and program listing flows for Admitio, improving first-result click-through rate by 22% and streamlining admission discovery for 5,000+ students.",
+    title: "Epischolar",
+    description: "Designed search, filters, and program listing flows for Epischolar, improving first-result click-through rate by 22% and streamlining admission discovery for 5,000+ students.",
     achievements: [
       "Applied information architecture & user journey mapping",
       "Restructured navigation and content hierarchy",
@@ -29,7 +29,7 @@ const projects = [
     tags: ["UX Research", "Wireframing", "Information Architecture"],
     color: "from-cyan/20 to-mint/30",
     emoji: "🎓",
-    link: "https://www.admitio.club",
+    link: "https://epischolar.com/",
   },
 ];
 
